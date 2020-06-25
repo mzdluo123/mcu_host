@@ -7,6 +7,10 @@ class DataStorage:
         self._data[k] = v
         self.notify(k)
 
+    def get(self, k):
+        if k in self._data:
+            return self._data[k]
+
     def notify(self, k):
         if k not in self._listeners:
             return
@@ -24,3 +28,6 @@ class DataStorage:
             return
         if callback in self._listeners[k]:
             self._listeners[k].remove(callback)
+
+
+data_storage = DataStorage()

@@ -1,15 +1,15 @@
 import tkinter as tk
 from tkinter import ttk
-from mcu_host.mcu.connector import MCUConnector
+from .. import connector
 from serial.tools import list_ports
 from tkinter import messagebox
 
 
 class SerialManager(ttk.Frame):
-    def __init__(self, master=None, connector: MCUConnector = None):
+    def __init__(self, master=None ):
         super().__init__(master)
         self.master = master
-        self.connector = connector
+
         self.var_baudrate = tk.IntVar()
         self.var_baudrate.set(9600)
         self.create_widgets()
@@ -43,9 +43,9 @@ class SerialManager(ttk.Frame):
 
     def start_serial(self):
         try:
-            self.connector.serial_port = self.serial_box.get()
-            self.connector.baudrate = self.var_baudrate.get()
-            self.connector.open_serial()
+            connector.serial_port = self.serial_box.get()
+            connector.baudrate = self.var_baudrate.get()
+            connector.open_serial()
             self.start_btn["state"] = tk.DISABLED
             self.stop_btn["state"] = tk.NORMAL
         except Exception as e:
