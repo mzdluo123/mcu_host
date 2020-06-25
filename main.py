@@ -15,10 +15,10 @@ def on_closing():
 
 
 if __name__ == '__main__':
-    connector = MCUConnector(data, "COM16", 9600, pool)
+    connector = MCUConnector(data, pool)
     connector.start_receive()
     window.protocol("WM_DELETE_WINDOW", on_closing)
-    app = MainFrame(window)
+    app = MainFrame(window, serial_connector=connector)
     app.bind_data(data)
     window.title('主窗口')
     window.geometry('500x300')

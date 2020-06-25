@@ -35,10 +35,3 @@ class DataShowFrame(tk.Frame):
         self.label = ttk.Label(self, font=self.label_font, text=self.data_name)
         self.label.grid(row=0, column=0, padx=10)
 
-
-class SerialManager(ttk.Frame):
-    def __init__(self, master=None, connector: MCUConnector = None):
-        super().__init__(master)
-        self.master = master
-        self.connector = connector
-        self.serial_box = ttk.Combobox(self)

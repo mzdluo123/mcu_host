@@ -1,6 +1,6 @@
 import tkinter as tk  # 使用Tkinter前需要先导入
 from concurrent.futures import ThreadPoolExecutor
-from mcu_host.ui import SerialManager
+from mcu_host.ui.serial_select import SerialManager
 
 from mcu_host.mcu import DataStorage
 
