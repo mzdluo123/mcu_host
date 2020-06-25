@@ -19,6 +19,7 @@ class MCUConnector:
             self.__serial.baudrate = self.baudrate
             self.__serial.port = self.serial_port
             self.__serial.timeout = 0.1
+            self.write_queue.empty()
             self.__serial.open()
             self.is_open = True
             self.start_receive()
@@ -43,14 +44,16 @@ class MCUConnector:
             pass
 
     def __send_loop(self):
-        try:
-            while self.is_open:
+        while self.is_open:
+            try:
                 data = self.write_queue.get(False, timeout=1)
-                if data is not bytes:
+                if type(data) != bytes:
                     continue
                 self.__serial.write(data)
-        except Exception as e:
-            pass
+                print(f"send {data}")
+            except Exception as e:
+                pass
+
 
     def start_receive(self):
         self.__pool.submit(self.__receive_loop)

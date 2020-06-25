@@ -38,8 +38,11 @@ class SerialManager(ttk.Frame):
         self.stop_btn["state"] = tk.DISABLED
 
     def refresh_serial_list(self):
-        self.serial_box["values"] = [i.device for i in list_ports.comports()]
+        ports = [i.device for i in list_ports.comports()]
+        self.serial_box["values"] = ports
         self.serial_box.update()
+        if len(ports) > 0:
+            self.serial_box.current(0)
 
     def start_serial(self):
         try:
@@ -53,7 +56,7 @@ class SerialManager(ttk.Frame):
 
     def stop_serial(self):
         try:
-            self.connector.close_serial()
+            connector.close_serial()
             self.stop_btn["state"] = tk.DISABLED
             self.start_btn["state"] = tk.NORMAL
         except Exception as e:

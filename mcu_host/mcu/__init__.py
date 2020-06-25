@@ -3,11 +3,17 @@ class DataStorage:
         self._data = {}
         self._listeners = {}
 
+    def __getitem__(self, item):
+        return self.get_data(item)
+
+    def __setitem__(self, key, value):
+        return self.update(key,value)
+
     def update(self, k, v):
         self._data[k] = v
         self.notify(k)
 
-    def get(self, k):
+    def get_data(self, k):
         if k in self._data:
             return self._data[k]
 
