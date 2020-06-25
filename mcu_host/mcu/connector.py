@@ -54,7 +54,6 @@ class MCUConnector:
             except Exception as e:
                 pass
 
-
     def start_receive(self):
         self.__pool.submit(self.__receive_loop)
 
